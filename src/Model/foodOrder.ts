@@ -1,10 +1,28 @@
-import { Schema } from "mongoose";
+import { model, Schema } from "mongoose";
+
+enum FoodOrderStatusEnum {
+  PENDING = "PENDING",
+  CANCELED = "CANCELED",
+  DELIVERED = "DELIVERED",
+}
+
+const foodOrderItemSchema = new Schema({
+  food: { type: Schema.Types.ObjectId, required: true },
+  quantity: { type: Number, required: true },
+});
 
 const foodOrderSchema = new Schema({
-    totalPrice: {type: Number, required: true},
-    user: {type: Schema.Types.ObjectId, ref: "User", required: true},
+  user: { type: String, required: true },
+  totalPrice: { type: String, required: true },
+  foodOrderItems: [{ type: foodOrderItemSchema, required: true }],
+  status: {
+    type: String,
+    required: true,
+    enum: Object.values(FoodOrderStatusEnum),
+  },
+  createdAt: { type: Date, default: Date.now() },
+  updatedAt: { type: Date, default: Date.now() },
+});
 
-    createdAt: {type: Date, default: Date.now()},
-    updatedAt: {type: Date, default: Date.now()}
-
-})
+const FoodOrder = model("foodOrder", foodOrderSchema);
+export default FoodOrder;
