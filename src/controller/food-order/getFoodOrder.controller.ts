@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import FoodOrder from "../../Model/foodOrder";
 
-export const getFoodOrder = async (req: Request, res: Response) => {
+export const getFoodOrders = async (req: Request, res: Response) => {
   try {
     const foodOrder = await FoodOrder.find();
     res.status(200).send({ success: true, foodOrder });

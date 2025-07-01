@@ -7,17 +7,19 @@ enum FoodOrderStatusEnum {
 }
 
 const foodOrderItemSchema = new Schema({
-  food: { type: Schema.Types.ObjectId, required: true },
+  food: { type: Schema.Types.ObjectId, required: true, ref: "Food" },
   quantity: { type: Number, required: true },
+  price: { type: String, required: true },
 });
 
 const foodOrderSchema = new Schema({
-  user: { type: String, required: true },
-  totalPrice: { type: String, required: true },
+  user: { type: Schema.Types.ObjectId, ref: "user", required: true },
+  totalPrice: { type: Number, required: true },
   foodOrderItems: [{ type: foodOrderItemSchema, required: true }],
   status: {
     type: String,
     required: true,
+    default: FoodOrderStatusEnum.PENDING,
     enum: Object.values(FoodOrderStatusEnum),
   },
   createdAt: { type: Date, default: Date.now() },
