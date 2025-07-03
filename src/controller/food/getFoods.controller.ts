@@ -35,6 +35,7 @@ export const FoodsWithCategories = async (req: Request, res: Response) => {
           },
         },
       },
+      
     ]);
     res.status(200).send({ succsess: true, foods });
   } catch (error) {
