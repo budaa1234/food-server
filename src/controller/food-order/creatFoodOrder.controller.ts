@@ -7,7 +7,7 @@ export const creatFoodOrder = async (req: Request, res: Response) => {
     const foodOrder = await new FoodOrder({
       user,
       totalPrice,
-      foodOrderItems,
+      foodOrderItems: foodOrderItems
     }).save();
     res.status(200).send({ succsess: true, foodOrder });
   } catch (error) {
