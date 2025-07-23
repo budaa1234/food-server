@@ -4,22 +4,22 @@ import foodCategoryRouter from "./Router/foodCategory.router";
 import foodRouter from "./Router/food.router";
 import foodOrderRouter from "./Router/food.order";
 import userRouter from "./Router/user.router";
-import cors from "cors"
+import cors from "cors";
 
 const app = express();
 
 const port = 4200;
 
 app.use(express.json());
-app.use(cors())
+app.use(cors());
 
 app.use("/category", foodCategoryRouter);
 
 app.use("/food", foodRouter);
 
-app.use("/food-order", foodOrderRouter)
+app.use("/food-order", foodOrderRouter);
 
-app.use("/user", userRouter)
+app.use("/user", userRouter);
 
 app.listen(port, async () => {
   await connectDb();
