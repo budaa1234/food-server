@@ -9,7 +9,7 @@ enum FoodOrderStatusEnum {
 const foodOrderItemSchema = new Schema({
   food: { type: Schema.Types.ObjectId, required: true, ref: "Food" },
   quantity: { type: Number, required: true },
-  price: { type: String, required: true },
+  price: { type: Number, required: true },
 });
 
 const foodOrderSchema = new Schema({
