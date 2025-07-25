@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import User from "../../Model/user";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-export const loginUser = async (req: Request, res: Response) => {
+export const signInUser = async (req: Request, res: Response) => {
   const { email, password } = req.body;
   try {
     const user = await User.findOne({ email });
