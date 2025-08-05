@@ -1,15 +1,22 @@
 import { Request, Response } from "express";
-import User from "../../Model/user";
+import jwt, { verify } from "jsonwebtoken";
+
 
 export const getCurrentUser = async (req: Request, res: Response) => {
     const authHeader = req.headers.authorization
-    console.log(authHeader);
+    const token =authHeader?.split(" ")[1] || ""
     
-    const {userId} =req.body
+   if(authHeader){
+    throw new Error("Authorization not found");
+   }
     
     try {
-        // const user = await User.findById(userId)
-        res.status(200).json({massage: "success"})
+        const verified = jwt.verify(token!, process.env.JSONWEBTOKEN!);
+        console.log(verified);
+        if(!verified) {
+            throw new Error("User not found");
+        }
+        res.status(200).json({user: verified});
     } catch (error) {
         
     }
